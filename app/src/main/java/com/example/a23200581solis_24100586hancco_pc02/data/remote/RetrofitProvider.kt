@@ -1,5 +1,6 @@
 package com.example.a23200581solis_24100586hancco_pc02.data.remote
 import com.example.a23200581solis_24100586hancco_pc02.data.remote.apod.ApodApi
+import com.example.a23200581solis_24100586hancco_pc02.data.remote.neo.NeoApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,5 +28,9 @@ object RetrofitProvider {
 
     val apodApi: ApodApi by lazy {
         apodRetrofit.create(ApodApi::class.java)
+    }
+
+    val neoApi: NeoApi by lazy {
+        neoRetrofit.create(NeoApi::class.java)
     }
 }
