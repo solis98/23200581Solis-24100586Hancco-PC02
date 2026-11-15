@@ -18,7 +18,10 @@ import coil.compose.AsyncImage
 import com.example.a23200581solis_24100586hancco_pc02.data.local.apod.ApodEntity
 
 @Composable
-fun ImagesApp(viewModel: ImagesViewModel) {
+fun ImagesApp(
+    viewModel: ImagesViewModel,
+    asteroidsContent: @Composable () -> Unit
+) {
 
     val navController = rememberNavController()
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -130,13 +133,9 @@ fun ImagesApp(viewModel: ImagesViewModel) {
             }
 
             composable("asteroids") {
-                Box(
-                    modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text("Asteroides: pendiente de integrar con Rolando")
-                }
+                asteroidsContent()
             }
+
         }
     }
 }
