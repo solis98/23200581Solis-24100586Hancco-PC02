@@ -1,4 +1,5 @@
 package com.example.a23200581solis_24100586hancco_pc02.data.remote
+import com.example.a23200581solis_24100586hancco_pc02.data.remote.apod.ApodApi
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -22,5 +23,9 @@ object RetrofitProvider {
             .baseUrl(NEO_BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    val apodApi: ApodApi by lazy {
+        apodRetrofit.create(ApodApi::class.java)
     }
 }
