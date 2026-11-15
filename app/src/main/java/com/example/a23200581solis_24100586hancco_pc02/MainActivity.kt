@@ -3,45 +3,39 @@ package com.example.a23200581solis_24100586hancco_pc02
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.a23200581solis_24100586hancco_pc02.ui.theme._23200581Solis24100586HanccoPC02Theme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.remember
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.a23200581solis_24100586hancco_pc02.di.AppContainer
+import com.example.a23200581solis_24100586hancco_pc02.ui.images.ImagesApp
+import com.example.a23200581solis_24100586hancco_pc02.ui.images.ImagesViewModel
 
 class MainActivity : ComponentActivity() {
+
+    private val container by lazy {
+        AppContainer(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            _23200581Solis24100586HanccoPC02Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+            MaterialTheme {
+
+                val factory = remember {
+                    ImagesViewModel.Factory(
+                        container.apodRepository
                     )
                 }
+
+                val imagesViewModel: ImagesViewModel = viewModel(
+                    factory = factory
+                )
+
+                ImagesApp(
+                    viewModel = imagesViewModel
+                )
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    _23200581Solis24100586HanccoPC02Theme {
-        Greeting("Android")
     }
 }
